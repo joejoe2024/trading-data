@@ -16,6 +16,12 @@ jobs:
           python3 fetch.py BTC-EUR 4h 4
           python3 fetch.py ETH-EUR 1d 4
           python3 fetch.py ETH-EUR 4h 4
+          python3 fetch.py BTC-EUR 1h 4
+          python3 fetch.py ETH-EUR 1h 4
+          python3 fetch.py BTC-EUR 15m 2
+          python3 fetch.py ETH-EUR 15m 2
+
+
       - name: CSV's committen
         run: |
           git config user.name "data-bot"
