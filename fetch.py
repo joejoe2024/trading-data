@@ -8,7 +8,7 @@ market   = sys.argv[1] if len(sys.argv) > 1 else "BTC-EUR"
 interval = sys.argv[2] if len(sys.argv) > 2 else "4h"
 years    = float(sys.argv[3]) if len(sys.argv) > 3 else 4.0
 
-STEP = {"1h":3600,"4h":14400,"1d":86400}[interval] * 1000
+STEP = {"15m":900,"1h":3600,"4h":14400,"1d":86400}[interval] * 1000
 end   = int(time.time()*1000)
 start = end - int(years*365.25*86400*1000)
 out   = f"{market}_{interval}.csv"
