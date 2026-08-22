@@ -1,0 +1,26 @@
+name: fetch-data
+on:
+  workflow_dispatch:        # handmatig startbaar
+  schedule:
+    - cron: "17 3 * * *"    # elke nacht 03:17 UTC
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Candles ophalen van Bitvavo
+        run: |
+          python3 fetch.py BTC-EUR 1d 4
+          python3 fetch.py BTC-EUR 4h 4
+          python3 fetch.py ETH-EUR 1d 4
+          python3 fetch.py ETH-EUR 4h 4
+      - name: CSV's committen
+        run: |
+          git config user.name "data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          mkdir -p data && mv *.csv data/
+          git add data/
+          git commit -m "data update $(date -u +%F)" || echo "geen wijzigingen"
+          git push
